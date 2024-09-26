@@ -12,12 +12,6 @@ class Board:
         self.__dimension = dimension
         self.__board = [[Cell(i,j) for j in range(dimension)] for i in range(dimension)]
 
-        # for i in range(dimension):
-        #     row = []
-        #     for j in range(dimension):
-        #         row.append((i, j))
-        #     self.__board.append(row)
-
     def print_board(self):
         for row in self.__board:
             for cell in row:
@@ -40,3 +34,6 @@ class Board:
     def board(self, board):
         self.__board = board
 
+    def __getitem__(self, index):
+        # Allow access to board using board[row]
+        return self.__board[index]

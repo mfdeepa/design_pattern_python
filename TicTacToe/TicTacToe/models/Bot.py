@@ -10,12 +10,12 @@ from strategies.BotPlayingStrategy import BotPlayingStrategy
 
 
 class Bot(Player):
-    __difficulty_level :BotDifficultyLevel
+    __difficulty_level: BotDifficultyLevel
     __BotPlayingStrategy: BotPlayingStrategy
 
-    def __init__(self,symbol:str,name:str, id:int , playerType:PlayerType, difficultyLevel:BotDifficultyLevel):
+    def __init__(self, symbol: str, name: str, id: int, playerType: PlayerType, difficultyLevel: BotDifficultyLevel):
         super().__init__(symbol, name, id, playerType)
-        self.__difficulty_level= difficultyLevel
+        self.__difficulty_level = difficultyLevel
         self.__BotPlayingStrategy = BotPlayingStrategy(self.__difficulty_level)
 
     @property

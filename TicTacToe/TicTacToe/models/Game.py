@@ -31,7 +31,8 @@ class Game:
         self.__board = Board(dimension)
         self.__moves = []
         self.__next_player_index = 0
-        self.__winner: Optional['Player'] = None  # if winner is not define then it would be None else it would be Player
+        self.__winner: Optional[
+            'Player'] = None  # if winner is not define then it would be None else it would be Player
         self.__game_state = GameState.IN_PROGRESS  #if we want to access the name of enum then we will write name else write .value .
 
     @property
@@ -98,7 +99,6 @@ class Game:
     def game_state(self, gameStatus: GameState):
         self.__game_state = gameStatus
 
-
     @staticmethod
     def get_builder():
         return Builder()
@@ -112,8 +112,8 @@ class Game:
                 return True
         return False
 
-    def make_move(self, move: Move):
-        player: Player = self.__player[self.next_player_index]
+    def make_move(self):
+        player: Player = self.__players[self.next_player_index]
         cell: Cell = player.make_move(board=self.__board)
 
         move: Move = Move(cell, player)
@@ -122,8 +122,13 @@ class Game:
         if self.check_winner(move, self.__board):
             self.__game_state = GameState.CONCLUDED
             self.__winner = player
-            # gamestate = GameState.CONCLUDED
             return None
+
+        if len(self.__moves) == self.__board.dimension * self.__board.dimension:
+            game_state: GameState = GameState.DRAW
+            return
+
+
         next_player_index = self.next_player_index + 1
         self.__next_player_index = next_player_index % len(self.__players)
 
@@ -139,6 +144,7 @@ class Game:
         # cell.CellState(CellState.EMPTY)
         cell.cell = CellState.EMPTY
 
+
 class Builder:
     __players: List[Player]
     __dimension: int
@@ -149,8 +155,8 @@ class Builder:
         self.__dimension = 0
         self.__winning_strategies = []
 
-    @property
-    def players(self) -> List[Player]:
+    # @property
+    def get_players(self) -> List[Player]:
         return self.__players
 
     # @players.setter
@@ -158,16 +164,17 @@ class Builder:
         self.__players = players
         return self
 
-    @property
-    def dimension(self) -> int:
+    # @property
+    def get_dimension(self) -> int:
         return self.__dimension
 
     # @dimension.setter
     def set_dimension(self, dimension: int):
         self.__dimension = dimension
         return self
-    @property
-    def winning_strategies(self) -> List[WinningStrategy]:
+
+    # @property
+    def get_winning_strategies(self) -> List[WinningStrategy]:
         return self.__winning_strategies
 
     # @winning_strategies.setter

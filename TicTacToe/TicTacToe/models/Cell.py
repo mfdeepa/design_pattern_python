@@ -11,15 +11,14 @@ class Cell:
     def __init__(self, row: int, col: int):
         self.row = row
         self.col = col
-        self.player = None
+        self._player = None
         self._cell_state = CellState.EMPTY
 
-    def print_cell(self):
-        if self._cell_state == CellState.FILLED:
-            print(f"| {self.player.symbol.symbol} |", end="")
-        else:
-            print("|  - |", end="")
+    def get_player(self):
+        return self._player
 
+    def set_player(self, player):
+        self._player = player
 
     @property
     def cell_state(self):
@@ -31,6 +30,9 @@ class Cell:
 
     def print_cell(self):
         if self._cell_state == CellState.FILLED:
-            print(f"| {self.player.symbol.symbol} |", end="")
+            print(f"| {self._player.symbol} |", end="")
         else:
             print("|  - |", end="")
+
+    def player(self, player):
+        self.set_player(player)

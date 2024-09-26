@@ -3,7 +3,7 @@ from models.Game import Game
 
 class GameController:
 
-    def make_move(self, game):
+    def make_move(self, game: Game):
         game.make_move()
 
     def print_board(self, game):
@@ -17,6 +17,6 @@ class GameController:
                 .set_winning_strategies(winning_strategy_list)
                 .build())
 
-    def undo(self, game):
+    def undo_move(self, game: Game):
         """Undo the last move in the game."""
-        game.undo()
+        game.undo_move()

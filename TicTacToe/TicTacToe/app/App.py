@@ -12,13 +12,14 @@ if __name__ == "__main__":
     players = []
 
     players.append(HumanPlayer('X', "deepa", 1, PlayerType.HUMAN))
-    players.append(HumanPlayer('O', "diya", 2, PlayerType.HUMAN))
+    players.append(HumanPlayer('O', "vidit", 2, PlayerType.HUMAN))
 
     winning_strategies = [
         RowWiseWinningStrategy(),
         ColWiseWinningStrategy(),
         DiagonalWiseWinningStrategy()
     ]
+    # ws = DiagonalWiseWinningStrategy()
 
     game = game_controller.create_game(dimension, players, winning_strategies)
 
@@ -27,12 +28,12 @@ if __name__ == "__main__":
 
         undo = input("does anyone want undo? (y/n) :")
         if undo == "y":
-            game.undo(game)
+            game_controller.undo_move(game)
             continue
 
-        game_controller.print_board(game)
+        game_controller.make_move(game)
 
-    if game.game_state() == GameState.CONCLUDED:
-        print(f"{game.winner().name()} has won the game")
-    elif game.game_state == GameState.DRAW:
+    if game.game_state == GameState.CONCLUDED:
+        print(f"{game.winner.name} has won the game")
+    if game.game_state == GameState.DRAW:
         print("it is a draw")

@@ -19,7 +19,7 @@ class RowWiseWinningStrategy(WinningStrategy, ABC):
         if symbol not in row_map:
             row_map[symbol] = 0
         row_map[symbol] += 1
-        if row_map[symbol] == board.dimension():
+        if row_map[symbol] == board.dimension:
             return True
         return False
 

@@ -9,8 +9,8 @@ class ColWiseWinningStrategy:
         pass
 
     def check_winner(self, board, move: Move) -> bool:
-        col: int = move.cell().col()
-        symbol: str = move.cell().symbol()
+        col: int = move.cell.col
+        symbol: str = move.player.symbol
 
         if col not in self.col_maps:
             self.col_maps[col] = {}
@@ -19,7 +19,7 @@ class ColWiseWinningStrategy:
             col_map[symbol] = 0
         col_map[symbol] += 1
 
-        if col_map[symbol] == board.dimension():
+        if col_map[symbol] == board.dimension:
             return True
         return False
 
